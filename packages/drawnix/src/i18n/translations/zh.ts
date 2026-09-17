@@ -183,6 +183,32 @@ const zhTranslations: Translations = {
   'tutorial.appToolbar': '导出，语言设置，...',
   'tutorial.creationToolbar': '选择一个工具开始你的创作',
   'tutorial.themeDescription': '在明亮和黑暗主题之间切换',
+
+  // 演示模式
+  'presentation.toolbar': '演示页面',
+  'presentation.start': '开始演示',
+  'presentation.empty.title': '还没有演示页',
+  'presentation.empty.description': '把当前视口保存为一页，或选中元素后从选区快速生成。',
+  'presentation.addSlide': '保存当前视口为新页面',
+  'presentation.addSlideFromSelection': '从当前选区生成页面',
+  'presentation.captureCurrent': '按当前视口更新此页面',
+  'presentation.slide': '演示页',
+  'presentation.untitledSlide': '未命名页面',
+  'presentation.rename': '重命名',
+  'presentation.delete': '删除页面',
+  'presentation.moveUp': '上移',
+  'presentation.moveDown': '下移',
+  'presentation.play': '演示',
+  'presentation.close': '关闭',
+  'presentation.prev': '上一页',
+  'presentation.next': '下一页',
+  'presentation.exit': '退出演示',
+  'presentation.pageIndicator': '第 {current} / {total} 页',
+  'presentation.end': '演示结束',
+  'presentation.staleRange': '该页面引用的部分元素已被删除，已自动调整',
+  'presentation.addedSlide': '已新增演示页',
+  'presentation.noSelection': '请先选中元素再生成页面',
+  'presentation.finished': '已经是最后一页，点击退出返回编辑',
 };
 
 export default zhTranslations;

@@ -597,3 +597,132 @@ export const FontSizeStepperDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = 
     </svg>
   );
 };
+
+export const PresentationPlayIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" fill="currentColor">
+      <path d="M3 2.5C3 1.9 3.66 1.54 4.18 1.87L13.4 7.37C13.89 7.66 13.89 8.34 13.4 8.63L4.18 14.13C3.66 14.46 3 14.1 3 13.5V2.5Z" />
+    </g>
+  </svg>
+);
+
+export const PresentationSlidesIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      strokeWidth="1.3"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2.5" y="3" width="9" height="7" rx="1.2" />
+      <path d="M5 12.5h7" />
+      <path d="M7 10v2.5" />
+    </g>
+  </svg>
+);
+
+export const PresentationPrevIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" fill="currentColor">
+      <path d="M10.5 3.5C10.5 3.1 10.02 2.88 9.73 3.13L5.15 7.13C4.95 7.31 4.95 7.69 5.15 7.87L9.73 11.87C10.02 12.12 10.5 11.9 10.5 11.5V3.5Z" />
+      <rect x="3" y="3.2" width="1.4" height="9.6" rx="0.4" />
+    </g>
+  </svg>
+);
+
+export const PresentationNextIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" fill="currentColor">
+      <path d="M5.5 3.5C5.5 3.1 5.98 2.88 6.27 3.13L10.85 7.13C11.05 7.31 11.05 7.69 10.85 7.87L6.27 11.87C5.98 12.12 5.5 11.9 5.5 11.5V3.5Z" />
+      <rect x="11.6" y="3.2" width="1.4" height="9.6" rx="0.4" />
+    </g>
+  </svg>
+);
+
+export const PresentationCloseIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 4L12 12" />
+      <path d="M12 4L4 12" />
+    </g>
+  </svg>
+);
+
+export const PresentationAddIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M8 3.5V12.5" />
+      <path d="M3.5 8H12.5" />
+    </g>
+  </svg>
+);
+
+export const PresentationRenameIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      strokeWidth="1.3"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M11.5 2.5L13.5 4.5L6 12H3V9L11.5 2.5Z" />
+    </g>
+  </svg>
+);
+
+export const PresentationChevronUpIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 10L8 6L12 10" />
+    </g>
+  </svg>
+);
+
+export const PresentationChevronDownIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 6L8 10L12 6" />
+    </g>
+  </svg>
+);
+
+export const PresentationCaptureIcon = createIcon(
+  <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      strokeWidth="1.3"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M2 4.5C2 3.67 2.67 3 3.5 3H5L6 1.8H10L11 3H12.5C13.33 3 14 3.67 14 4.5V11.5C14 12.33 13.33 13 12.5 13H3.5C2.67 13 2 12.33 2 11.5V4.5Z" />
+      <circle cx="8" cy="8" r="2.6" />
+    </g>
+  </svg>
+);

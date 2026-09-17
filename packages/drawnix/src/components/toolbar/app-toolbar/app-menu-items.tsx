@@ -1,7 +1,7 @@
 import { ExportImageIcon, GithubIcon, OpenFileIcon, SaveFileIcon, TrashIcon } from '../../icons';
 import { useBoard, useListRender } from '@plait-board/react-board';
 import { BoardTransforms, PlaitBoard, PlaitElement, PlaitTheme, Viewport } from '@plait/core';
-import { loadFromJSON, saveAsJSON, saveJSON } from '../../../data/json';
+import { applyLoadedPresentation, loadFromJSON, saveAsJSON, saveJSON } from '../../../data/json';
 import MenuItem from '../../menu/menu-item';
 import MenuItemLink from '../../menu/menu-item-link';
 import { saveAsPng, saveAsSvg } from '../../../utils/image';
@@ -13,6 +13,7 @@ import { useContext } from 'react';
 import { MenuContentPropsContext } from '../../menu/common';
 import { EVENT } from '../../../constants';
 import { getShortcutKey } from '../../../utils/common';
+import { usePresentation } from '../../../presentation';
 
 export const SaveToFile = () => {
   const board = useBoard();
@@ -71,6 +72,7 @@ export const OpenFile = () => {
   const board = useBoard();
   const listRender = useListRender();
   const { setAppState } = useDrawnix();
+  const { setPresentation } = usePresentation();
   const { t } = useI18n();
   const clearAndLoad = (value: PlaitElement[], viewport?: Viewport, theme?: PlaitTheme) => {
     board.children = value;
@@ -91,6 +93,10 @@ export const OpenFile = () => {
       onSelect={() => {
         loadFromJSON(board).then(({ data, fileHandle }) => {
           clearAndLoad(data.elements, data.viewport, data.theme);
+          // Presentation metadata rides along in the same file; ranges
+          // referencing elements absent from the loaded document are pruned.
+          const presentation = applyLoadedPresentation(board, data);
+          setPresentation(presentation);
           setAppState((currentAppState) => ({
             ...currentAppState,
             fileHandle,

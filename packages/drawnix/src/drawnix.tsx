@@ -46,11 +46,18 @@ import type { Language } from './i18n/types';
 import { Tutorial } from './components/tutorial';
 import { LASER_POINTER_CLASS_NAME } from './utils/laser-pointer';
 import { Toast, useToast } from './components/toast/toast';
+import {
+  PresentationData,
+  PresentationProvider,
+  setBoardPresentation,
+} from './presentation';
+import { PresentationMode } from './presentation/components/presentation-mode';
 
 export type DrawnixProps = {
   value: PlaitElement[];
   viewport?: Viewport;
   theme?: PlaitTheme;
+  presentation?: PresentationData | null;
   initialToolState?: Partial<DrawnixToolState>;
   initialPreference?: {
     copyTransparent?: boolean;
@@ -68,6 +75,7 @@ export type DrawnixProps = {
     exportTransparent: boolean;
   }) => void;
   onLanguageChange?: (language: Language) => void;
+  onPresentationChange?: (presentation: PresentationData | null) => void;
   afterInit?: (board: PlaitBoard) => void;
   tutorial?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
@@ -88,6 +96,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
   value,
   viewport,
   theme,
+  presentation,
   initialToolState,
   initialPreference,
   initialLanguage,
@@ -99,6 +108,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
   onToolStateChange,
   onPreferenceChange,
   onLanguageChange,
+  onPresentationChange,
   afterInit,
   tutorial = false,
 }) => {
@@ -129,11 +139,41 @@ export const Drawnix: React.FC<DrawnixProps> = ({
   );
   const { toast, showToast } = useToast();
   const lastKnownLanguageRef = useRef<Language>(initialLanguage ?? 'zh');
+  const presentationApiRef = useRef<{
+    load: (
+      presentation: PresentationData | null,
+      options?: { prune?: boolean }
+    ) => void;
+  } | null>(null);
 
   if (board) {
     board.appState = appState;
     board.showToast = showToast;
   }
+
+  // Sync presentation metadata provided via props (e.g. loaded from storage
+  // after an async fetch) into the provider. Signatures are compared so the
+  // provider echoing changes back through `onPresentationChange` never loops.
+  const presentationSignatureRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!presentationApiRef.current) {
+      return;
+    }
+    const signature = presentation ? JSON.stringify(presentation) : null;
+    if (signature === presentationSignatureRef.current) {
+      return;
+    }
+    presentationSignatureRef.current = signature;
+    presentationApiRef.current.load(presentation ?? null);
+  }, [presentation]);
+
+  const handlePresentationChange = (next: PresentationData | null) => {
+    presentationSignatureRef.current = next ? JSON.stringify(next) : null;
+    if (board) {
+      setBoardPresentation(board, next);
+    }
+    onPresentationChange?.(next);
+  };
 
   useEffect(() => {
     if (!board) {
@@ -258,13 +298,21 @@ export const Drawnix: React.FC<DrawnixProps> = ({
             >
               {tutorial && board && <Tutorial />}
             </Board>
-            <AppToolbar></AppToolbar>
-            <CreationToolbar></CreationToolbar>
-            <ZoomToolbar></ZoomToolbar>
-            <ThemeToolbar></ThemeToolbar>
-            <PopupToolbar></PopupToolbar>
-            <LinkPopup></LinkPopup>
-            <ClosePencilToolbar></ClosePencilToolbar>
+            <PresentationProvider
+              onPresentationChange={handlePresentationChange}
+              onRegisterApi={(api) => {
+                presentationApiRef.current = api;
+              }}
+            >
+              <PresentationMode />
+              <AppToolbar></AppToolbar>
+              <CreationToolbar></CreationToolbar>
+              <ZoomToolbar></ZoomToolbar>
+              <ThemeToolbar></ThemeToolbar>
+              <PopupToolbar></PopupToolbar>
+              <LinkPopup></LinkPopup>
+              <ClosePencilToolbar></ClosePencilToolbar>
+            </PresentationProvider>
             <TTDDialog container={containerRef.current}></TTDDialog>
             <CleanConfirm container={containerRef.current}></CleanConfirm>
             <Toast toast={toast} container={containerRef.current}></Toast>

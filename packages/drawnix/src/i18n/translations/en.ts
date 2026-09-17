@@ -182,6 +182,34 @@ const enTranslations: Translations = {
   'tutorial.appToolbar': 'Export, language settings, ...',
   'tutorial.creationToolbar': 'Select a tool to start your creation',
   'tutorial.themeDescription': 'Switch between light and dark themes',
+
+  // Presentation mode
+  'presentation.toolbar': 'Presentation slides',
+  'presentation.start': 'Start presentation',
+  'presentation.empty.title': 'No slides yet',
+  'presentation.empty.description':
+    'Save the current viewport as a slide, or select elements and generate one from the selection.',
+  'presentation.addSlide': 'Save current viewport as a new slide',
+  'presentation.addSlideFromSelection': 'Create slide from current selection',
+  'presentation.captureCurrent': 'Update this slide with the current viewport',
+  'presentation.slide': 'Slide',
+  'presentation.untitledSlide': 'Untitled slide',
+  'presentation.rename': 'Rename',
+  'presentation.delete': 'Delete slide',
+  'presentation.moveUp': 'Move up',
+  'presentation.moveDown': 'Move down',
+  'presentation.play': 'Present',
+  'presentation.close': 'Close',
+  'presentation.prev': 'Previous slide',
+  'presentation.next': 'Next slide',
+  'presentation.exit': 'Exit presentation',
+  'presentation.pageIndicator': 'Slide {current} of {total}',
+  'presentation.end': 'End of presentation',
+  'presentation.staleRange':
+    'Some elements referenced by this slide were deleted; the range has been adjusted',
+  'presentation.addedSlide': 'Slide added',
+  'presentation.noSelection': 'Select elements first to create a slide from them',
+  'presentation.finished': 'This is the last slide. Exit to return to editing.',
 };
 
 export default enTranslations;

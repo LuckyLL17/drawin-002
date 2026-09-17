@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Drawnix, DrawnixToolState } from '@drawnix/drawnix';
+import { Drawnix, DrawnixToolState, PresentationData } from '@drawnix/drawnix';
+import type { BoardChangeData } from '@plait-board/react-board';
 import { PlaitElement, PlaitTheme, Viewport } from '@plait/core';
 import localforage from 'localforage';
 
@@ -7,6 +8,7 @@ type AppValue = {
   children: PlaitElement[];
   viewport?: Viewport;
   theme?: PlaitTheme;
+  presentation?: PresentationData | null;
 };
 
 type Language = 'zh' | 'en' | 'ru' | 'ar' | 'vi';
@@ -81,6 +83,7 @@ export function App() {
       value={value.children}
       viewport={value.viewport}
       theme={value.theme}
+      presentation={value.presentation ?? null}
       initialToolState={initialToolState}
       initialLanguage={preference.language}
       initialPreference={{
@@ -93,16 +96,32 @@ export function App() {
       onPreferenceChange={({ copyTransparent, exportTransparent }) => {
         updatePreference({ copyTransparent, exportTransparent });
       }}
-      onChange={(value) => {
-        const newValue = value as AppValue;
-        localforage.setItem(MAIN_BOARD_CONTENT_KEY, newValue);
-        setValue(newValue);
-        if (newValue.children && newValue.children.length > 0) {
+      onChange={(changeData: BoardChangeData) => {
+        // BoardChangeData has no presentation metadata; carry it over so
+        // normal edits don't drop saved slides.
+        setValue((currentValue) => {
+          const newValue: AppValue = {
+            children: changeData.children,
+            viewport: changeData.viewport,
+            theme: changeData.theme,
+            presentation: currentValue.presentation,
+          };
+          localforage.setItem(MAIN_BOARD_CONTENT_KEY, newValue);
+          return newValue;
+        });
+        if (changeData.children.length > 0) {
           setTutorial(false);
         }
       }}
       onToolStateChange={(toolState) => {
         localforage.setItem(MAIN_BOARD_TOOL_STATE_KEY, toolState);
+      }}
+      onPresentationChange={(presentation) => {
+        setValue((currentValue) => {
+          const newValue = { ...currentValue, presentation };
+          localforage.setItem(MAIN_BOARD_CONTENT_KEY, newValue);
+          return newValue;
+        });
       }}
       tutorial={tutorial}
       afterInit={(_board) => {

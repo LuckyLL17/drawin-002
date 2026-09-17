@@ -1,0 +1,407 @@
+@use '../../styles/variables.scss' as *;
+
+.drawnix {
+  .presentation-panel-trigger {
+    position: absolute;
+    top: 92px;
+    left: 36px;
+    z-index: 2;
+
+    @include isMobile {
+      top: auto;
+      bottom: 92px;
+      left: 20px;
+    }
+  }
+
+  .presentation-panel__popover {
+    z-index: 20;
+    padding: 0;
+    background-color: var(--island-bg-color);
+    border: 1px solid var(--island-border-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-island);
+  }
+
+  .presentation-panel {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    max-height: 60vh;
+    padding: 12px;
+    gap: 10px;
+    color: var(--color-on-surface);
+    background-color: var(--island-bg-color);
+    border-radius: var(--border-radius-md);
+
+    @include isMobile {
+      width: 84vw;
+      max-width: 320px;
+      max-height: 70vh;
+    }
+  }
+
+  .presentation-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .presentation-panel__title {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .presentation-panel__presentation-select,
+  .presentation-panel__presentation-name-input {
+    flex: 1;
+    min-width: 0;
+    padding: 4px 8px;
+    font-size: 13px;
+    color: var(--color-on-surface);
+    background-color: var(--color-surface-secondary-container);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-sm);
+    outline: none;
+  }
+
+  .presentation-panel__presentation-name-input:focus {
+    border-color: var(--color-primary);
+  }
+
+  .presentation-panel__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .presentation-panel__pages {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    min-height: 60px;
+    max-height: 40vh;
+    margin: 0 -4px;
+    padding: 0 4px;
+  }
+
+  .presentation-panel__page {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: var(--color-surface-primary-container);
+
+      .presentation-panel__page-delete {
+        visibility: visible;
+      }
+    }
+
+    &--dragover {
+      border-color: var(--color-primary);
+    }
+
+    &--invalid {
+      opacity: 0.75;
+    }
+  }
+
+  .presentation-panel__page-index {
+    flex-shrink: 0;
+    width: 20px;
+    font-size: 11px;
+    text-align: center;
+    color: var(--color-on-surface);
+    opacity: 0.6;
+  }
+
+  .presentation-panel__page-main {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .presentation-panel__page-name {
+    flex: 1;
+    min-width: 0;
+    padding: 3px 6px;
+    font-size: 13px;
+    color: var(--color-on-surface);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-sm);
+    outline: none;
+
+    &:focus {
+      background-color: var(--color-surface-secondary-container);
+      border-color: var(--color-primary);
+    }
+  }
+
+  .presentation-panel__page-warning {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--color-promotion, #b26a00);
+  }
+
+  .presentation-panel__page-delete {
+    visibility: hidden;
+    flex-shrink: 0;
+  }
+
+  .presentation-panel__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 12px;
+    text-align: center;
+    color: var(--color-on-surface);
+    opacity: 0.7;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      opacity: 0.6;
+    }
+  }
+
+  .presentation-panel__empty-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .presentation-panel__empty-hint {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  .presentation-panel__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .presentation-panel__footer-button,
+  .presentation-panel__play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    border: 1px solid var(--default-border-color);
+    background-color: var(--island-bg-color);
+    color: var(--color-on-surface);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-surface-primary-container);
+    }
+
+    &:disabled,
+    &--disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+
+  .presentation-panel__play {
+    font-weight: 600;
+    color: var(--color-on-primary-container, #fff);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+
+    &:hover:not(:disabled) {
+      filter: brightness(1.05);
+      background-color: var(--color-primary);
+    }
+
+    &:disabled {
+      background-color: var(--color-disabled, #ccc);
+      border-color: transparent;
+    }
+  }
+
+  .presentation-panel__hint {
+    font-size: 11px;
+    text-align: right;
+    opacity: 0.55;
+  }
+
+  .presentation-panel__drag-veil {
+    display: none;
+  }
+
+  // -------- Presenting mode --------
+  &.drawnix--presenting {
+    .app-toolbar,
+    .draw-toolbar,
+    .theme-toolbar,
+    .presentation-panel-trigger,
+    .pencil-mode-toolbar,
+    .freehand-panel,
+    .popup-toolbar {
+      display: none !important;
+    }
+
+    // The zoom toolbar stays (handy for live zoom) but is detached from its
+    // normal spot so it never collides with the presenter bar.
+    .zoom-toolbar {
+      top: auto;
+      right: auto;
+      bottom: 24px;
+      left: 24px;
+      display: flex;
+    }
+  }
+
+  .presentation-presenter {
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    pointer-events: none;
+  }
+
+  .presentation-presenter__tap-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 32%;
+    border: none;
+    background: transparent;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+
+    &:disabled {
+      pointer-events: none;
+    }
+
+    &--prev {
+      left: 0;
+    }
+
+    &--next {
+      right: 0;
+    }
+  }
+
+  .presentation-presenter__toolbar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 10px;
+    pointer-events: auto;
+
+    @include isMobile {
+      top: 12px;
+      padding: 4px 8px;
+      gap: 8px;
+    }
+  }
+
+  .presentation-presenter__info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 220px;
+    padding: 0 6px;
+
+    @include isMobile {
+      display: none;
+    }
+  }
+
+  .presentation-presenter__name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-on-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .presentation-presenter__page-title {
+    font-size: 11px;
+    color: var(--color-on-surface);
+    opacity: 0.65;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .presentation-presenter__controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .presentation-presenter__counter {
+    min-width: 48px;
+    text-align: center;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-on-surface);
+  }
+
+  .presentation-presenter__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background: transparent;
+    color: var(--color-on-surface);
+    cursor: pointer;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-surface-primary-container);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    &--exit:hover {
+      color: var(--color-primary);
+    }
+
+    @include isMobile {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

@@ -169,6 +169,33 @@ export interface Translations {
   'tutorial.appToolbar': string;
   'tutorial.creationToolbar': string;
   'tutorial.themeDescription': string;
+
+  // Presentation mode
+  'presentation.title': string;
+  'presentation.menu.open': string;
+  'presentation.start': string;
+  'presentation.exit': string;
+  'presentation.present': string;
+  'presentation.capture': string;
+  'presentation.captureFromSelection': string;
+  'presentation.empty': string;
+  'presentation.empty.hint': string;
+  'presentation.page.delete': string;
+  'presentation.page.duplicate': string;
+  'presentation.page.playFromHere': string;
+  'presentation.page.invalid': string;
+  'presentation.page.namePlaceholder': string;
+  'presentation.newPresentation': string;
+  'presentation.renamePresentation': string;
+  'presentation.deletePresentation': string;
+  'presentation.pageCount': string;
+  'presentation.defaultName': string;
+  'presentation.page.defaultName': string;
+  'presentation.toast.missingElements': string;
+  'presentation.toast.missingElements.description': string;
+  'presentation.toast.empty': string;
+  'presentation.toast.empty.description': string;
+  'presentation.toast.captured': string;
 }
 
 // I18n context interface

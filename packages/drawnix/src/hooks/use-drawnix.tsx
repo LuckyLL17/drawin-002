@@ -12,6 +12,7 @@ import { LinkElement } from '@plait/common';
 import { DEFAULT_FREEHAND_PRESETS, FreehandDrawOptions } from '../plugins/freehand/presets';
 import { DrawnixFileHandle } from '../data/json';
 import type { DrawnixToastOptions } from '../components/toast/toast';
+import type { Presentation } from '../components/presentation/types';
 
 export enum DialogType {
   mermaidToDrawnix = 'mermaidToDrawnix',
@@ -60,6 +61,10 @@ export const mergeToolState = (toolState?: Partial<DrawnixToolState>): DrawnixTo
 export interface DrawnixBoard extends PlaitBoard {
   appState: DrawnixState;
   showToast?: (toast: DrawnixToastOptions) => void;
+  /** Presentation metadata, kept in sync by the PresentationProvider. */
+  presentations?: Presentation[];
+  /** Imperative entry point for replacing presentation metadata (file open). */
+  replacePresentations?: (data: unknown) => void;
 }
 
 export type LinkState = {

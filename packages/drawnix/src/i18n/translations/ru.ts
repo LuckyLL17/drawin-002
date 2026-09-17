@@ -185,6 +185,33 @@ const ruTranslations: Translations = {
   'tutorial.appToolbar': 'Экспорт, настройки языка, ...',
   'tutorial.creationToolbar': 'Выберите инструмент, чтобы начать творить',
   'tutorial.themeDescription': 'Переключение между светлой и тёмной темами',
+
+  // Presentation mode
+  'presentation.title': 'Презентация',
+  'presentation.menu.open': 'Страницы презентации',
+  'presentation.start': 'Начать презентацию',
+  'presentation.exit': 'Завершить презентацию',
+  'presentation.present': 'Показ',
+  'presentation.capture': 'Сохранить текущую область просмотра как страницу',
+  'presentation.captureFromSelection': 'Создать страницу из выделения',
+  'presentation.empty': 'Страниц пока нет',
+  'presentation.empty.hint': 'Сохраните текущую область просмотра или создайте страницу из выделенных элементов',
+  'presentation.page.delete': 'Удалить страницу',
+  'presentation.page.duplicate': 'Дублировать страницу',
+  'presentation.page.playFromHere': 'Показывать с этой страницы',
+  'presentation.page.invalid': 'Элементы, на которые ссылается страница, удалены',
+  'presentation.page.namePlaceholder': 'Название страницы',
+  'presentation.newPresentation': 'Новая презентация',
+  'presentation.renamePresentation': 'Переименовать презентацию',
+  'presentation.deletePresentation': 'Удалить презентацию',
+  'presentation.pageCount': 'стр.',
+  'presentation.defaultName': 'Презентация',
+  'presentation.page.defaultName': 'Страница',
+  'presentation.toast.missingElements': 'Элементы этой страницы были удалены',
+  'presentation.toast.missingElements.description': 'Показывается сохранённая область просмотра',
+  'presentation.toast.empty': 'Нет страниц для показа',
+  'presentation.toast.empty.description': 'Сначала создайте страницу из текущей области или выделения',
+  'presentation.toast.captured': 'Страница презентации добавлена',
 };
 
 export default ruTranslations;

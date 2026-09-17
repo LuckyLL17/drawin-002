@@ -184,6 +184,33 @@ const viTranslations: Translations = {
   'tutorial.appToolbar': 'Xuất, cài đặt ngôn ngữ, ...',
   'tutorial.creationToolbar': 'Chọn một công cụ để bắt đầu sáng tạo',
   'tutorial.themeDescription': 'Chuyển đổi giữa chế độ sáng và tối',
+
+  // Presentation mode
+  'presentation.title': 'Bản trình bày',
+  'presentation.menu.open': 'Các trang trình bày',
+  'presentation.start': 'Bắt đầu trình bày',
+  'presentation.exit': 'Thoát trình bày',
+  'presentation.present': 'Trình chiếu',
+  'presentation.capture': 'Lưu khung nhìn hiện tại thành một trang',
+  'presentation.captureFromSelection': 'Tạo trang từ vùng chọn',
+  'presentation.empty': 'Chưa có trang nào',
+  'presentation.empty.hint': 'Lưu khung nhìn hiện tại thành một trang, hoặc tạo từ các phần tử đã chọn',
+  'presentation.page.delete': 'Xóa trang',
+  'presentation.page.duplicate': 'Nhân bản trang',
+  'presentation.page.playFromHere': 'Trình bày từ trang này',
+  'presentation.page.invalid': 'Các phần tử được trang tham chiếu đã bị xóa',
+  'presentation.page.namePlaceholder': 'Tên trang',
+  'presentation.newPresentation': 'Bản trình bày mới',
+  'presentation.renamePresentation': 'Đổi tên bản trình bày',
+  'presentation.deletePresentation': 'Xóa bản trình bày',
+  'presentation.pageCount': 'trang',
+  'presentation.defaultName': 'Bản trình bày',
+  'presentation.page.defaultName': 'Trang',
+  'presentation.toast.missingElements': 'Các phần tử tập trung của trang này đã bị xóa',
+  'presentation.toast.missingElements.description': 'Đang hiển thị khung nhìn đã lưu',
+  'presentation.toast.empty': 'Không có trang nào để trình bày',
+  'presentation.toast.empty.description': 'Tạo một trang từ khung nhìn hoặc vùng chọn hiện tại trước',
+  'presentation.toast.captured': 'Đã thêm trang trình bày',
 };
 
 export default viTranslations;

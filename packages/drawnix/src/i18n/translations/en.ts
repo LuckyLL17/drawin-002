@@ -182,6 +182,33 @@ const enTranslations: Translations = {
   'tutorial.appToolbar': 'Export, language settings, ...',
   'tutorial.creationToolbar': 'Select a tool to start your creation',
   'tutorial.themeDescription': 'Switch between light and dark themes',
+
+  // Presentation mode
+  'presentation.title': 'Presentation',
+  'presentation.menu.open': 'Presentation pages',
+  'presentation.start': 'Start presentation',
+  'presentation.exit': 'Exit presentation',
+  'presentation.present': 'Present',
+  'presentation.capture': 'Capture current viewport as a page',
+  'presentation.captureFromSelection': 'Create page from selection',
+  'presentation.empty': 'No pages yet',
+  'presentation.empty.hint': 'Save the current viewport as a page, or generate one from selected elements',
+  'presentation.page.delete': 'Delete page',
+  'presentation.page.duplicate': 'Duplicate page',
+  'presentation.page.playFromHere': 'Present from this page',
+  'presentation.page.invalid': 'Elements referenced by this page were deleted',
+  'presentation.page.namePlaceholder': 'Page name',
+  'presentation.newPresentation': 'New presentation',
+  'presentation.renamePresentation': 'Rename presentation',
+  'presentation.deletePresentation': 'Delete presentation',
+  'presentation.pageCount': 'pages',
+  'presentation.defaultName': 'Presentation',
+  'presentation.page.defaultName': 'Page',
+  'presentation.toast.missingElements': 'The focused elements of this page were deleted',
+  'presentation.toast.missingElements.description': 'Showing the saved viewport instead',
+  'presentation.toast.empty': 'No pages to present',
+  'presentation.toast.empty.description': 'Create a page from the current viewport or selection first',
+  'presentation.toast.captured': 'Presentation page added',
 };
 
 export default enTranslations;

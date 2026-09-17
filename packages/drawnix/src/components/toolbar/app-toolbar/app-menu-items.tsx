@@ -1,7 +1,9 @@
-import { ExportImageIcon, GithubIcon, OpenFileIcon, SaveFileIcon, TrashIcon } from '../../icons';
+import { ExportImageIcon, GithubIcon, OpenFileIcon, SaveFileIcon, TrashIcon, PresentationPlayIcon } from '../../icons';
 import { useBoard, useListRender } from '@plait-board/react-board';
 import { BoardTransforms, PlaitBoard, PlaitElement, PlaitTheme, Viewport } from '@plait/core';
 import { loadFromJSON, saveAsJSON, saveJSON } from '../../../data/json';
+import { DrawnixBoard } from '../../../hooks/use-drawnix';
+import { usePresentations } from '../../presentation/presentation-context';
 import MenuItem from '../../menu/menu-item';
 import MenuItemLink from '../../menu/menu-item-link';
 import { saveAsPng, saveAsSvg } from '../../../utils/image';
@@ -72,7 +74,12 @@ export const OpenFile = () => {
   const listRender = useListRender();
   const { setAppState } = useDrawnix();
   const { t } = useI18n();
-  const clearAndLoad = (value: PlaitElement[], viewport?: Viewport, theme?: PlaitTheme) => {
+  const clearAndLoad = (
+    value: PlaitElement[],
+    viewport?: Viewport,
+    theme?: PlaitTheme,
+    presentations?: unknown
+  ) => {
     board.children = value;
     board.viewport = viewport || { zoom: 1 };
     if (theme) {
@@ -84,13 +91,15 @@ export const OpenFile = () => {
       parentG: PlaitBoard.getElementHost(board),
     });
     BoardTransforms.fitViewport(board);
+    // Restore presentation metadata (no-op / sanitized for old files).
+    (board as DrawnixBoard).replacePresentations?.(Array.isArray(presentations) ? presentations : []);
   };
   return (
     <MenuItem
       data-testid="open-button"
       onSelect={() => {
         loadFromJSON(board).then(({ data, fileHandle }) => {
-          clearAndLoad(data.elements, data.viewport, data.theme);
+          clearAndLoad(data.elements, data.viewport, data.theme, data.presentations);
           setAppState((currentAppState) => ({
             ...currentAppState,
             fileHandle,
@@ -191,6 +200,25 @@ export const CleanBoard = () => {
   );
 };
 CleanBoard.displayName = 'CleanBoard';
+
+export const StartPresentation = () => {
+  const { activePresentation, startPresenting } = usePresentations();
+  const { t } = useI18n();
+  return (
+    <MenuItem
+      data-testid="start-presentation-menu-button"
+      icon={PresentationPlayIcon}
+      disabled={!activePresentation || activePresentation.pages.length === 0}
+      onSelect={() => {
+        startPresenting();
+      }}
+      aria-label={t('presentation.start')}
+    >
+      {t('presentation.start')}
+    </MenuItem>
+  );
+};
+StartPresentation.displayName = 'StartPresentation';
 
 export const Socials = () => {
   return (

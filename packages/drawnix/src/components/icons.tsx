@@ -597,3 +597,77 @@ export const FontSizeStepperDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = 
     </svg>
   );
 };
+
+export const PresentationIcon = createIcon(
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1.5" y="2.5" width="13" height="8.5" rx="1.2" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M6 13.5H10M8 11V13.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <path d="M5.5 6.8L7.2 8.2L10.5 5.6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const PresentationPlayIcon = createIcon(
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M5 3.8V12.2C5 12.95 5.82 13.41 6.47 13.01L13.02 9.01C13.61 8.65 13.61 7.78 13.02 7.42L6.47 3.42C5.82 3.02 5 3.48 5 4.23V3.8Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+export const PresentationPrevIcon = createIcon(
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.5 3.5L5 8L10.5 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const PresentationNextIcon = createIcon(
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5.5 3.5L11 8L5.5 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const PresentationCloseIcon = createIcon(
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const PresentationAddPageIcon = createIcon(
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2.5" y="2" width="11" height="12" rx="1.2" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M8 5.5V10.5M5.5 8H10.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+  </svg>
+);
+
+export const PresentationCaptureIcon = createIcon(
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1.5" y="3.5" width="9" height="6.5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M10.5 5.8L14 4.2V9.8L10.5 8.2V5.8Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+    <path d="M3 12.5H9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+  </svg>
+);
+
+export const PresentationWarningIcon = createIcon(
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M8.75 2.4L14.4 12.3C14.64 12.72 14.34 13.25 13.86 13.25H2.14C1.66 13.25 1.36 12.72 1.6 12.3L7.25 2.4C7.49 1.98 8.51 1.98 8.75 2.4Z"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinejoin="round"
+    />
+    <path d="M8 6V9.2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <circle cx="8" cy="11.1" r="0.75" fill="currentColor" />
+  </svg>
+);
+
+export const PresentationDragIcon = createIcon(
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="3.5" cy="2.5" r="1" fill="currentColor" />
+    <circle cx="8.5" cy="2.5" r="1" fill="currentColor" />
+    <circle cx="3.5" cy="6" r="1" fill="currentColor" />
+    <circle cx="8.5" cy="6" r="1" fill="currentColor" />
+    <circle cx="3.5" cy="9.5" r="1" fill="currentColor" />
+    <circle cx="8.5" cy="9.5" r="1" fill="currentColor" />
+  </svg>
+);

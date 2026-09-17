@@ -183,6 +183,33 @@ const zhTranslations: Translations = {
   'tutorial.appToolbar': '导出，语言设置，...',
   'tutorial.creationToolbar': '选择一个工具开始你的创作',
   'tutorial.themeDescription': '在明亮和黑暗主题之间切换',
+
+  // Presentation mode
+  'presentation.title': '演示',
+  'presentation.menu.open': '演示页面',
+  'presentation.start': '开始演示',
+  'presentation.exit': '退出演示',
+  'presentation.present': '播放',
+  'presentation.capture': '捕获当前视口为一页',
+  'presentation.captureFromSelection': '从选区生成一页',
+  'presentation.empty': '还没有演示页',
+  'presentation.empty.hint': '把当前视口保存为一页，或从选中元素快速生成',
+  'presentation.page.delete': '删除该页',
+  'presentation.page.duplicate': '复制该页',
+  'presentation.page.playFromHere': '从此页开始演示',
+  'presentation.page.invalid': '该页引用的元素已被删除',
+  'presentation.page.namePlaceholder': '页面名称',
+  'presentation.newPresentation': '新建演示',
+  'presentation.renamePresentation': '重命名演示',
+  'presentation.deletePresentation': '删除演示',
+  'presentation.pageCount': '页',
+  'presentation.defaultName': '演示',
+  'presentation.page.defaultName': '页面',
+  'presentation.toast.missingElements': '该页关注的元素已被删除',
+  'presentation.toast.missingElements.description': '正在显示已保存的视口',
+  'presentation.toast.empty': '暂无可演示的页面',
+  'presentation.toast.empty.description': '请先从当前视口或选区创建一页',
+  'presentation.toast.captured': '已新增演示页',
 };
 
 export default zhTranslations;

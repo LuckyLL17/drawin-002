@@ -3,6 +3,7 @@ import { useDrawnix } from '../../hooks/use-drawnix';
 import './clean-confirm.scss';
 import { useBoard } from '@plait-board/react-board';
 import { useI18n } from '../../i18n';
+import { DrawnixBoard } from '../../hooks/use-drawnix';
 
 export const CleanConfirm = ({ container }: { container: HTMLElement | null }) => {
   const { appState, setAppState } = useDrawnix();
@@ -32,6 +33,9 @@ export const CleanConfirm = ({ container }: { container: HTMLElement | null }) =
             autoFocus
             onClick={() => {
               board.deleteFragment(board.children);
+              // The whole board is wiped, so saved presentation pages no
+              // longer resolve to any element.
+              (board as DrawnixBoard).replacePresentations?.([]);
               setAppState({ ...appState, openCleanConfirm: false });
             }}
           >

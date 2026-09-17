@@ -20,6 +20,7 @@ import {
   SaveAsImage,
   SaveToFile,
   Socials,
+  StartPresentation,
 } from './app-menu-items';
 import { LanguageSwitcherMenu } from './language-switcher-menu';
 import Menu from '../../menu/menu';
@@ -70,6 +71,7 @@ export const AppToolbar = () => {
               <SaveAsFile></SaveAsFile>
               <SaveAsImage></SaveAsImage>
               <CleanBoard></CleanBoard>
+              <StartPresentation></StartPresentation>
               <MenuSeparator />
               <LanguageSwitcherMenu />
               <Socials />

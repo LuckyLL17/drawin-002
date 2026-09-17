@@ -1,4 +1,4 @@
-import { Board, BoardChangeData, Wrapper } from '@plait-board/react-board';
+import { Board, BoardChangeData, Wrapper, useBoard } from '@plait-board/react-board';
 import {
   PlaitBoard,
   PlaitBoardOptions,
@@ -46,6 +46,10 @@ import type { Language } from './i18n/types';
 import { Tutorial } from './components/tutorial';
 import { LASER_POINTER_CLASS_NAME } from './utils/laser-pointer';
 import { Toast, useToast } from './components/toast/toast';
+import { PresentationProvider } from './components/presentation/presentation-context';
+import { PresentationPanel } from './components/presentation/presentation-panel';
+import { PresentationPresenter } from './components/presentation/presenter';
+import type { Presentation } from './components/presentation/types';
 
 export type DrawnixProps = {
   value: PlaitElement[];
@@ -68,11 +72,41 @@ export type DrawnixProps = {
     exportTransparent: boolean;
   }) => void;
   onLanguageChange?: (language: Language) => void;
+  /** Presentation metadata restored from a saved file. */
+  presentations?: Presentation[];
+  onPresentationsChange?: (presentations: Presentation[]) => void;
   afterInit?: (board: PlaitBoard) => void;
   tutorial?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export type { DrawnixToolState } from './hooks/use-drawnix';
+
+/**
+ * Bridges the board context (provided by <Wrapper>) with the presentation
+ * feature. The provider wraps the editing chrome so any toolbar/menu item can
+ * consume presentation state; it also renders the panel + full-screen
+ * presenter.
+ */
+const PresentationLayer: React.FC<{
+  initialPresentations?: Presentation[];
+  onPresentationsChange?: (presentations: Presentation[]) => void;
+  onPresentingChange?: (presenting: boolean) => void;
+  children?: React.ReactNode;
+}> = ({ initialPresentations, onPresentationsChange, onPresentingChange, children }) => {
+  const board = useBoard() as DrawnixBoard;
+  return (
+    <PresentationProvider
+      board={board}
+      initialPresentations={initialPresentations}
+      onPresentationsChange={onPresentationsChange}
+      onPresentingChange={onPresentingChange}
+    >
+      {children}
+      <PresentationPanel></PresentationPanel>
+      <PresentationPresenter></PresentationPresenter>
+    </PresentationProvider>
+  );
+};
 
 const applyToolStateToBoard = (board: PlaitBoard, toolState: DrawnixToolState) => {
   BoardTransforms.updatePointerType(board, toolState.pointer);
@@ -99,6 +133,8 @@ export const Drawnix: React.FC<DrawnixProps> = ({
   onToolStateChange,
   onPreferenceChange,
   onLanguageChange,
+  presentations,
+  onPresentationsChange,
   afterInit,
   tutorial = false,
 }) => {
@@ -124,6 +160,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
   });
 
   const [board, setBoard] = useState<DrawnixBoard | null>(null);
+  const [isPresenting, setIsPresenting] = useState(false);
   const [themeColorMode, setThemeColorMode] = useState<ThemeColorMode>(
     theme?.themeColorMode || ThemeColorMode.default
   );
@@ -227,6 +264,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
         <div
           className={classNames('drawnix', {
             'drawnix--mobile': appState.isMobile,
+            'drawnix--presenting': isPresenting,
             [`theme--${themeColorMode}`]: themeColorMode,
           })}
           ref={containerRef}
@@ -258,15 +296,21 @@ export const Drawnix: React.FC<DrawnixProps> = ({
             >
               {tutorial && board && <Tutorial />}
             </Board>
-            <AppToolbar></AppToolbar>
-            <CreationToolbar></CreationToolbar>
-            <ZoomToolbar></ZoomToolbar>
-            <ThemeToolbar></ThemeToolbar>
-            <PopupToolbar></PopupToolbar>
-            <LinkPopup></LinkPopup>
-            <ClosePencilToolbar></ClosePencilToolbar>
-            <TTDDialog container={containerRef.current}></TTDDialog>
-            <CleanConfirm container={containerRef.current}></CleanConfirm>
+            <PresentationLayer
+              initialPresentations={presentations}
+              onPresentationsChange={onPresentationsChange}
+              onPresentingChange={setIsPresenting}
+            >
+              <AppToolbar></AppToolbar>
+              <CreationToolbar></CreationToolbar>
+              <ZoomToolbar></ZoomToolbar>
+              <ThemeToolbar></ThemeToolbar>
+              <PopupToolbar></PopupToolbar>
+              <LinkPopup></LinkPopup>
+              <ClosePencilToolbar></ClosePencilToolbar>
+              <TTDDialog container={containerRef.current}></TTDDialog>
+              <CleanConfirm container={containerRef.current}></CleanConfirm>
+            </PresentationLayer>
             <Toast toast={toast} container={containerRef.current}></Toast>
           </Wrapper>
           <canvas className={`${LASER_POINTER_CLASS_NAME} mouse-course-hidden`}></canvas>

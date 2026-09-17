@@ -60,6 +60,7 @@ export const isValidDrawnixData = (data?: any): data is DrawnixExportedData => {
 };
 
 export const serializeAsJSON = (board: PlaitBoard): string => {
+  const presentations = (board as { presentations?: unknown }).presentations;
   const data = {
     type: DrawnixExportedType.drawnix,
     version: VERSIONS.drawnix,
@@ -67,6 +68,11 @@ export const serializeAsJSON = (board: PlaitBoard): string => {
     elements: board.children,
     viewport: board.viewport,
     theme: board.theme,
+    // Only persist the key when there is actual metadata, keeping old files
+    // byte-compatible for boards that never use presentations.
+    ...(Array.isArray(presentations) && presentations.length > 0
+      ? { presentations }
+      : {}),
   };
 
   return JSON.stringify(data, null, 2);

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Drawnix, DrawnixToolState } from '@drawnix/drawnix';
+import type { Presentation } from '@drawnix/drawnix';
 import { PlaitElement, PlaitTheme, Viewport } from '@plait/core';
 import localforage from 'localforage';
 
@@ -7,6 +8,7 @@ type AppValue = {
   children: PlaitElement[];
   viewport?: Viewport;
   theme?: PlaitTheme;
+  presentations?: Presentation[];
 };
 
 type Language = 'zh' | 'en' | 'ru' | 'ar' | 'vi';
@@ -30,6 +32,8 @@ localforage.config({
 export function App() {
   const [value, setValue] = useState<AppValue>({ children: [] });
   const [initialToolState, setInitialToolState] = useState<Partial<DrawnixToolState>>();
+  const [presentations, setPresentations] = useState<Presentation[]>([]);
+  const presentationsRef = useRef<Presentation[]>([]);
   const [preference, setPreference] = useState<MainBoardPreference>({
     language: 'zh',
     copyTransparent: false,
@@ -57,6 +61,11 @@ export function App() {
       if (storedData) {
         const appValue = storedData as AppValue;
         setValue(appValue);
+        const storedPresentations = Array.isArray(appValue.presentations)
+          ? appValue.presentations
+          : [];
+        setPresentations(storedPresentations);
+        presentationsRef.current = storedPresentations;
         if (appValue.children && appValue.children.length === 0) {
           setTutorial(true);
         }
@@ -81,6 +90,7 @@ export function App() {
       value={value.children}
       viewport={value.viewport}
       theme={value.theme}
+      presentations={presentations}
       initialToolState={initialToolState}
       initialLanguage={preference.language}
       initialPreference={{
@@ -93,8 +103,10 @@ export function App() {
       onPreferenceChange={({ copyTransparent, exportTransparent }) => {
         updatePreference({ copyTransparent, exportTransparent });
       }}
-      onChange={(value) => {
-        const newValue = value as AppValue;
+      onChange={(change) => {
+        // Always merge the latest presentation metadata so board/viewport
+        // writes can never clobber presentation pages in storage.
+        const newValue = { ...(change as AppValue), presentations: presentationsRef.current };
         localforage.setItem(MAIN_BOARD_CONTENT_KEY, newValue);
         setValue(newValue);
         if (newValue.children && newValue.children.length > 0) {
@@ -103,6 +115,17 @@ export function App() {
       }}
       onToolStateChange={(toolState) => {
         localforage.setItem(MAIN_BOARD_TOOL_STATE_KEY, toolState);
+      }}
+      onPresentationsChange={(nextPresentations) => {
+        presentationsRef.current = nextPresentations;
+        setPresentations(nextPresentations);
+        localforage.getItem(MAIN_BOARD_CONTENT_KEY).then((stored) => {
+          const storedValue = (stored as AppValue) ?? { children: [] };
+          localforage.setItem(MAIN_BOARD_CONTENT_KEY, {
+            ...storedValue,
+            presentations: nextPresentations,
+          });
+        });
       }}
       tutorial={tutorial}
       afterInit={(_board) => {

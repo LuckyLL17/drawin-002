@@ -184,6 +184,33 @@ const arTranslations: Translations = {
   'tutorial.appToolbar': 'تصدير، إعدادات اللغة، ...',
   'tutorial.creationToolbar': 'اختر أداة لبدء الإنشاء',
   'tutorial.themeDescription': 'التبديل بين السمة الفاتحة والداكنة',
+
+  // Presentation mode
+  'presentation.title': 'العرض التقديمي',
+  'presentation.menu.open': 'صفحات العرض',
+  'presentation.start': 'بدء العرض',
+  'presentation.exit': 'إنهاء العرض',
+  'presentation.present': 'عرض',
+  'presentation.capture': 'حفظ إطار العرض الحالي كصفحة',
+  'presentation.captureFromSelection': 'إنشاء صفحة من التحديد',
+  'presentation.empty': 'لا توجد صفحات بعد',
+  'presentation.empty.hint': 'احفظ إطار العرض الحالي كصفحة، أو أنشئ صفحة من العناصر المحددة',
+  'presentation.page.delete': 'حذف الصفحة',
+  'presentation.page.duplicate': 'تكرار الصفحة',
+  'presentation.page.playFromHere': 'العرض بدءًا من هذه الصفحة',
+  'presentation.page.invalid': 'تم حذف العناصر التي تشير إليها هذه الصفحة',
+  'presentation.page.namePlaceholder': 'اسم الصفحة',
+  'presentation.newPresentation': 'عرض جديد',
+  'presentation.renamePresentation': 'إعادة تسمية العرض',
+  'presentation.deletePresentation': 'حذف العرض',
+  'presentation.pageCount': 'صفحة',
+  'presentation.defaultName': 'العرض',
+  'presentation.page.defaultName': 'صفحة',
+  'presentation.toast.missingElements': 'تم حذف العناصر التي تركز عليها هذه الصفحة',
+  'presentation.toast.missingElements.description': 'عرض إطار العرض المحفوظ بدلاً من ذلك',
+  'presentation.toast.empty': 'لا توجد صفحات للعرض',
+  'presentation.toast.empty.description': 'أنشئ صفحة من إطار العرض الحالي أو التحديد أولاً',
+  'presentation.toast.captured': 'تمت إضافة صفحة العرض',
 };
 
 export default arTranslations;
